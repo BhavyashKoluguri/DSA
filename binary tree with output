@@ -1,0 +1,121 @@
+// import static org.junit.jupiter.api.Assertions.assertEquals;
+
+// import org.junit.jupiter.api.Test;
+import java.util.*;
+class BinaryTree {
+  public BinaryTree() {
+    
+  }
+  
+    private static class Node{
+      int value;
+      Node left;
+      Node right;
+      
+      public Node(int value){
+        this.value = value;
+    }
+  }
+
+  public Node root;
+
+  public void populate(Scanner scanner){
+    System.out.println("Enter the root node: ");
+    int value = scanner.nextInt();
+    root = new Node(value);
+    populate(scanner, root);
+  }
+
+  private void populate(Scanner scanner, Node node){
+    System.out.println("Want to enter left of" + node.value);
+    boolean left = scanner.nextBoolean();
+    if(left){
+      System.out.println("Enter the value of left node of: " + node.value);
+      int value = scanner.nextInt();
+      node.left = new Node(value);
+      populate(scanner, node.left);
+  }
+    System.out.println("Want to enter right of" + node.value);
+    boolean right = scanner.nextBoolean();
+    if(right){
+        System.out.println("Enter the value of right node of: " + node.value);
+        int value = scanner.nextInt();
+        node.right = new Node(value);
+        populate(scanner, node.right);
+    }
+    
+}
+  public void prettyDisplay(Node node, int level){
+    if(node == null){
+      return;
+    }
+    prettyDisplay(node.right, level + 1);
+
+    if(level != 0){
+      for(int i = 0; i < level - 1; i++){
+        System.out.print("|\t\t");
+      }
+      System.out.println("|------->" + node.value);
+    } else {
+      System.out.println(node.value);
+    }
+    prettyDisplay(node.left, level + 1);
+  }
+  
+}
+
+import java.util.Scanner;
+
+public class Main{
+  public static void main(String[] args){
+    Scanner scanner = new Scanner(System.in);
+    BinaryTree tree = new BinaryTree();
+    tree.populate(scanner);
+    tree.prettyDisplay(tree.root, 0);
+  }
+}
+
+Output:
+
+Enter the root node: 
+19
+Want to enter left of19
+true
+Enter the value of left node of: 19
+4
+Want to enter left of4
+true
+Enter the value of left node of: 4
+3
+Want to enter left of3
+false
+Want to enter right of3
+true
+Enter the value of right node of: 3
+5
+Want to enter left of5
+false
+Want to enter right of5
+false
+Want to enter right of4
+true
+Enter the value of right node of: 4
+6
+Want to enter left of6
+false
+Want to enter right of6
+false
+Want to enter right of19
+true
+Enter the value of right node of: 19
+15
+Want to enter left of15
+false
+Want to enter right of15
+false
+|------->15
+19
+|       |------->6
+|------->4
+|       |       |------->5
+|       |------->3
