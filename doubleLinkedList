@@ -13,3 +13,113 @@ public class Main {
 
   }
 }
+
+public class DL {
+
+  private Node head;
+  private Node tail;
+  private int size;
+
+  public DL() {
+    this.size = 0;
+  }
+
+  public void insertFirst(int val) {
+    Node node = new Node(val);
+    node.next = head;
+    node.prev = null;
+    if (head != null) {
+      head.prev = node;
+    }
+    head = node;
+    size++;
+  }
+
+  public void display() {
+    Node node = head;
+    Node last = null;
+    while (node != null) {
+      System.out.print(node.val + " -> ");
+      last = node;
+      node = node.next;
+    }
+    System.out.println("END");
+
+    System.out.println("Print in reverse");
+    while (last != null) {
+      System.out.print(last.val + " -> ");
+      last = last.prev;
+    }
+    System.out.println("START");
+  }
+
+  public void displayReverse() {
+    Node tail = head;
+    while (tail != null) {
+      tail = tail.next;
+    }
+    Node temp = tail;
+    while (temp != null) {
+      System.out.print(temp.val + " -> ");
+      temp = temp.prev;
+    }
+  }
+
+  public void insertLast(int val) {
+    Node node = new Node(val);
+    Node last = head;
+
+    node.next = null;
+
+    if (head == null) {
+      node.prev = null;
+      head = node;
+      return;
+    }
+
+    while (last.next != null) {
+      last = last.next;
+    }
+
+    last.next = node;
+    node.prev = last;
+    size++;
+  }
+
+  public void insertMiddle(int val, int pos) {
+    if (pos == 0) {
+      insertFirst(val);
+    }
+    if (pos == size) {
+      insertLast(val);
+    }
+    Node temp = head;
+    for (int i = 1; i < pos; i++) {
+      temp = temp.next;
+    }
+    Node node = new Node(val);
+    node.next = temp.next;
+    node.prev = temp;
+    temp.next = node;
+    if (node.next != null) {
+      node.next.prev = node;
+    }
+    size++;
+  }
+
+  public class Node {
+    int val;
+    Node next;
+    Node prev;
+
+    public Node(int val) {
+      this.val = val;
+    }
+
+    public Node(int val, Node next, Node prev) {
+      this.val = val;
+      this.next = next;
+      this.prev = prev;
+    }
+  }
+}
