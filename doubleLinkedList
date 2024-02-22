@@ -1,0 +1,15 @@
+public class Main {
+  public static void main(String[] args) {
+    DL list = new DL();
+    list.insertFirst(11);
+    list.insertFirst(10);
+    list.insertFirst(9);
+    list.insertFirst(8);
+    list.display();
+    list.displayReverse();
+    list.insertMiddle(21, 2);
+    list.display();
+    list.displayReverse();
+
+  }
+}
